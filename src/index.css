@@ -4,5 +4,10 @@
 
   --color-primary: #3FDA99;
   --color-secondary: #27B7B4;
-  --color-accent: #4BC3B0;
+  --color-accentaccent: #4BC3B0;
 }
+
+* {
+  scroll-behavior: smooth;
+}
+
