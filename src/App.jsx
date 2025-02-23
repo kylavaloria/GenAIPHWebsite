@@ -1,23 +1,34 @@
-import Hero from "./sections/Hero";
-import About from "./sections/About";
-import Principles from "./sections/Principles";
-import Meetups from "./sections/Meetups";
-import SuccessEvents from "./sections/SuccessEvents";
-import Footer from "./sections/Footer";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import Home from "./pages/Home";
+import Blogs from "./pages/Blogs";
+import Navbar from "./components/Navbar"; // ✅ Import Navbar
 import "./index.css";
+import "@fontsource/montserrat";
+import BlogPost from "./pages/BlogPost";
 
-import "@fontsource/montserrat"; // Import Montserrat font
+function Layout() {
+  const location = useLocation(); // 🔍 Get current URL
+
+  return (
+    <>
+      {/* ✅ Render Navbar only if NOT on /blogs */}
+      {location.pathname !== "/blogs" && !location.pathname.startsWith("/blog-post") && <Navbar />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/blogs" element={<Blogs />} />
+        <Route path="/blog-post/:id" element={<BlogPost />} />
+      </Routes>
+    </>
+  );
+}
 
 function App() {
   return (
-    <div style={{ fontFamily: "Montserrat, sans-serif" }}>
-      <div id="home"><Hero /></div>
-      <div id="about"><About /></div>
-      <div id="principles"><Principles /></div>
-      <div id="meetups"><Meetups /></div>
-      <div id="events"><SuccessEvents /></div>
-      <Footer />
-    </div>
+    <Router>
+      <div style={{ fontFamily: "Montserrat, sans-serif" }}>
+        <Layout />
+      </div>
+    </Router>
   );
 }
 

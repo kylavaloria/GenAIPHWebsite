@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion"; 
+import { motion, AnimatePresence } from "framer-motion";
 import Event from "../components/Event.jsx";
-import { ChevronLeft, ChevronRight } from "lucide-react"; 
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const events = [
   {
@@ -46,41 +46,42 @@ const events = [
   },
 ];
 
-const ITEMS_PER_PAGE = 3;
-
 const SuccessEvents = () => {
   const [startIndex, setStartIndex] = useState(0);
-  const [direction, setDirection] = useState(1); 
+  const [direction, setDirection] = useState(1);
+
+  // Adjust number of events per page based on screen size
+  const ITEMS_PER_PAGE = window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
 
   const handleNext = () => {
     if (startIndex + ITEMS_PER_PAGE < events.length) {
-      setDirection(1); 
+      setDirection(1);
       setStartIndex(startIndex + ITEMS_PER_PAGE);
     }
   };
 
   const handlePrev = () => {
     if (startIndex > 0) {
-      setDirection(-1); 
+      setDirection(-1);
       setStartIndex(startIndex - ITEMS_PER_PAGE);
     }
   };
 
   return (
-    <section className="bg-gradient-to-b from-[#27B7B4] to-[#125655] py-16 px-20 relative">
+    <section className="bg-gradient-to-b from-[#27B7B4] to-[#125655] py-16 px-6 sm:px-10 lg:px-20 relative">
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl font-bold text-white mb-8">Successful Events</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">Successful Events</h2>
 
         {/* Events Grid with Smooth Animation */}
         <div className="overflow-hidden w-full flex justify-center relative">
           <AnimatePresence initial={false} custom={direction}>
             <motion.div
               key={startIndex}
-              className="flex space-x-0"
+              className="flex space-x-4"
               initial={{ opacity: 0, x: direction * 100 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -direction * 100 }} 
-              transition={{ duration: 0.2, ease: "easeIn" }}
+              exit={{ opacity: 0, x: -direction * 100 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
             >
               {events.slice(startIndex, startIndex + ITEMS_PER_PAGE).map((event, index) => (
                 <Event key={index} {...event} />
@@ -93,7 +94,7 @@ const SuccessEvents = () => {
         <button
           onClick={handlePrev}
           disabled={startIndex === 0}
-          className="absolute left-4 top-1/2 -translate-y-1/2 border-2 border-white opacity-60 text-white p-2 rounded-full shadow-lg disabled:opacity-20 bg-transparent enabled:hover:bg-white enabled:hover:text-black transition"
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 border-2 border-white opacity-60 text-white p-2 rounded-full shadow-lg disabled:opacity-20 bg-transparent enabled:hover:bg-white enabled:hover:text-black transition"
         >
           <ChevronLeft size={24} />
         </button>
@@ -101,7 +102,7 @@ const SuccessEvents = () => {
         <button
           onClick={handleNext}
           disabled={startIndex + ITEMS_PER_PAGE >= events.length}
-          className="absolute right-4 top-1/2 -translate-y-1/2 border-2 border-white opacity-60 text-white p-2 rounded-full shadow-lg disabled:opacity-20 bg-transparent enabled:hover:bg-white enabled:hover:text-black transition"
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 border-2 border-white opacity-60 text-white p-2 rounded-full shadow-lg disabled:opacity-20 bg-transparent enabled:hover:bg-white enabled:hover:text-black transition"
         >
           <ChevronRight size={24} />
         </button>
