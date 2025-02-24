@@ -1,6 +1,6 @@
 import React from "react";
 
-const Event = ({ title, date, time, location, venue, image }) => {
+const Event = ({ title, date, time, location, venue, image, link }) => {
   return (
     <div className="text-center w-100 max-w-90">
       {/* Event Image */}
@@ -19,10 +19,15 @@ const Event = ({ title, date, time, location, venue, image }) => {
         <p className="text-xs/6 text-[#ffffff]">{location}</p>
       </div>
 
-      {/* See More Button */}
-      <button className="bg-[#3DDC97] text-white px-7 py-2 text-xs rounded-full font-semibold mb-3 hover:bg-[#27B7B4] cursor-pointer">
+      {/* ✅ See More Button - Uses Link */}
+      <a
+        href={link} // ✅ Open event link
+        target="_blank" // ✅ Open in new tab
+        rel="noopener noreferrer" // ✅ Security best practice
+        className="bg-[#3DDC97] text-white px-7 py-2 text-xs rounded-full font-semibold mb-3 hover:bg-[#27B7B4] cursor-pointer inline-block"
+      >
         See More
-      </button>
+      </a>
     </div>
   );
 };
