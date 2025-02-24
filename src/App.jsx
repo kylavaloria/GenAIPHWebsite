@@ -2,8 +2,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import { AnimatePresence } from "framer-motion";
 import Home from "./pages/Home";
 import Blogs from "./pages/Blogs";
-import BlogPost from "./pages/BlogPost";
-import Navbar from "./components/Navbar";
+import BlogPost from "./pages/BlogPost";;
 import "./index.css";
 import "@fontsource/montserrat";
 

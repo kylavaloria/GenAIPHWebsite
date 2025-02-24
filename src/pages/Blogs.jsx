@@ -19,6 +19,7 @@ const Blogs = () => {
           id: doc.id,
           ...doc.data(),
         }));
+        window.scroll(0, 0);
         setBlogs(blogData);
         setLoading(false);
       } catch (error) {
