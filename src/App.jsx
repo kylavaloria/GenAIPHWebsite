@@ -1,24 +1,23 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import Home from "./pages/Home";
 import Blogs from "./pages/Blogs";
-import Navbar from "./components/Navbar"; // ✅ Import Navbar
+import BlogPost from "./pages/BlogPost";
+import Navbar from "./components/Navbar";
 import "./index.css";
 import "@fontsource/montserrat";
-import BlogPost from "./pages/BlogPost";
 
-function Layout() {
-  const location = useLocation(); // 🔍 Get current URL
+function AnimatedRoutes() {
+  const location = useLocation(); // ✅ Now inside Router
 
   return (
-    <>
-      {/* ✅ Render Navbar only if NOT on /blogs */}
-      {location.pathname !== "/blogs" && !location.pathname.startsWith("/blog-post") && <Navbar />}
-      <Routes>
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blog-post/:id" element={<BlogPost />} />
       </Routes>
-    </>
+    </AnimatePresence>
   );
 }
 
@@ -26,7 +25,8 @@ function App() {
   return (
     <Router>
       <div style={{ fontFamily: "Montserrat, sans-serif" }}>
-        <Layout />
+        {/* ✅ Show Navbar only if NOT on Blog pages */}
+        <AnimatedRoutes />
       </div>
     </Router>
   );

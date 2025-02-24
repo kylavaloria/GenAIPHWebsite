@@ -1,14 +1,13 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react"; 
+import { ArrowLeft } from "lucide-react";
 
-const BlogCover = () => {
-  const navigate = useNavigate();
-
+const BlogCover = ({ navigate }) => {
   return (
     <div className="relative w-full aspect-[4.5/1] bg-gradient-to-b from-gray-400 to-gray-600 flex items-center justify-center text-white">
-      {/* Back Arrow */}
+      {/* ✅ Back Arrow with Reverse Transition */}
       <button
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/", { state: { from: "blogs" } })} // ✅ Track navigation direction
         className="absolute top-6 left-6 flex items-center gap-2 text-white hover:opacity-70 cursor-pointer"
       >
         <ArrowLeft size={25} />

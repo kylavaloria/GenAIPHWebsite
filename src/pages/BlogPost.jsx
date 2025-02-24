@@ -1,16 +1,20 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom"; // ✅ Added useLocation
 import { FiArrowLeft } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
 import { FacebookShareButton, TwitterShareButton, LinkedinShareButton, EmailShareButton, PinterestShareButton } from "react-share";
 import { FacebookIcon, TwitterIcon, LinkedinIcon, EmailIcon, PinterestIcon } from "react-share";
+import { motion } from "framer-motion";
 
 const BlogPost = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const shareUrl = window.location.href;
+  const location = useLocation(); // ✅ Detect navigation direction
+  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
 
-  // Sample data (Replace this with an actual API fetch if available)
+  // Check if user came from Blogs
+  const isGoingBack = location.state?.from === "blogs"; // ✅ If coming from blogs, reverse animation
+
+  // Sample data (Replace this with an actual API fetch)
   const blog = {
     id: id,
     title: "Title of the Blog",
@@ -23,11 +27,17 @@ const BlogPost = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F6FFFC]">
+    <motion.div
+      initial={{ x: isGoingBack ? "-100%" : "100%" }} // ✅ Reverse animation if going back
+      animate={{ x: "0%" }}
+      exit={{ x: isGoingBack ? "100%" : "-100%" }} // ✅ Reverse exit animation too
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+      className="min-h-screen bg-[#F6FFFC]"
+    >
       {/* Header Section */}
       <div className="bg-gradient-to-b from-[#27B7B4] to-[#4BC3B0] py-8 px-5 text-white text-center relative">
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/blogs", { state: { from: "blogPost" } })} // ✅ Pass state for direction tracking
           className="absolute top-4 left-4 text-white text-xl hover:opacity-70 cursor-pointer"
         >
           <FiArrowLeft size={25} />
@@ -74,7 +84,7 @@ const BlogPost = () => {
         {/* Blog Content */}
         <p className="mt-6 text-gray-700 leading-relaxed text-sm sm:text-base">{blog.content}</p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
