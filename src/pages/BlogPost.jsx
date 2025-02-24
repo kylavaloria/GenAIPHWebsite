@@ -8,6 +8,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import remarkBreaks from "remark-breaks";
+import Footer from "../sections/Footer";
 
 import {
   FacebookShareButton,
@@ -62,7 +63,7 @@ const BlogPost = () => {
       animate={{ x: "0%" }}
       exit={{ x: isGoingBack ? "100%" : "-100%" }}
       transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="min-h-screen bg-[#F6FFFC]"
+      className="min-h-screen bg-[#E0FFF9]"
     >
       {loading ? (
         <p className="text-center text-[#27B7B4]">Loading...</p>
@@ -124,28 +125,29 @@ const BlogPost = () => {
 
             {/* Blog Content (Markdown Support) */}
             <div className="mt-6 text-gray-700 text-sm sm:text-base leading-relaxed">
-  <ReactMarkdown
-    remarkPlugins={[remarkGfm, remarkBreaks]}
-    rehypePlugins={[rehypeRaw]}
-    components={{
-      h1: ({ children }) => <h1 className="text-3xl font-bold mt-6 mb-4">{children}</h1>,
-      h2: ({ children }) => <h2 className="text-2xl font-semibold mt-5 mb-3">{children}</h2>,
-      h3: ({ children }) => <h3 className="text-xl font-semibold mt-4 mb-2">{children}</h3>,
-      p: ({ children }) => <p className="mb-4">{children}</p>,
-      ul: ({ children }) => <ul className="list-disc list-inside mb-4">{children}</ul>,
-      ol: ({ children }) => <ol className="list-decimal list-inside mb-4">{children}</ol>,
-      li: ({ children }) => <li className="ml-4">{children}</li>,
-      blockquote: ({ children }) => <blockquote className="border-l-4 border-gray-500 pl-4 italic">{children}</blockquote>,
-      code: ({ children }) => <code className="bg-gray-200 px-1 py-0.5 rounded text-red-500">{children}</code>,
-      pre: ({ children }) => <pre className="bg-gray-100 p-4 rounded">{children}</pre>,
-    }}
-  >
-    {blog.content?.join("\n")}
-  </ReactMarkdown>
-</div>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm, remarkBreaks]}
+                rehypePlugins={[rehypeRaw]}
+                components={{
+                  h1: ({ children }) => <h1 className="text-3xl font-bold mt-6 mb-4">{children}</h1>,
+                  h2: ({ children }) => <h2 className="text-2xl font-semibold mt-5 mb-3">{children}</h2>,
+                  h3: ({ children }) => <h3 className="text-xl font-semibold mt-4 mb-2">{children}</h3>,
+                  p: ({ children }) => <p className="mb-4">{children}</p>,
+                  ul: ({ children }) => <ul className="list-disc list-inside mb-4">{children}</ul>,
+                  ol: ({ children }) => <ol className="list-decimal list-inside mb-4">{children}</ol>,
+                  li: ({ children }) => <li className="ml-4">{children}</li>,
+                  blockquote: ({ children }) => <blockquote className="border-l-4 border-gray-500 pl-4 italic">{children}</blockquote>,
+                  code: ({ children }) => <code className="bg-gray-200 px-1 py-0.5 rounded text-red-500">{children}</code>,
+                  pre: ({ children }) => <pre className="bg-gray-100 p-4 rounded">{children}</pre>,
+                }}
+              >
+                {blog.content?.join("\n")}
+              </ReactMarkdown>
+            </div>
 
 
           </div>
+          <Footer />
         </>
       ) : (
         <p className="text-center text-[#27B7B4]">Blog not found.</p>

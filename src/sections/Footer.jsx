@@ -1,6 +1,6 @@
 import React from "react";
 import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaLinkedin, FaEnvelope, FaGithub } from "react-icons/fa";
-import ParticlesBackground from "../animations/ParticlesBackground";
+import logo from "../assets/logo-light.png";
 
 const Footer = () => {
   return (
@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {/* Logo & Description */}
         <div className="text-center sm:text-left">
-          <img src="./src/assets/logo-light.png" alt="Gen AI PH" className="w-28 mx-auto sm:mx-0 mb-3" />
+          <img src={logo} alt="Gen AI PH" className="w-28 mx-auto sm:mx-0 mb-3" />
           <p className="text-[#27B7B4] text-sm leading-relaxed max-w-sm mx-auto sm:mx-0">
             Gen AI PH Builders is a community-driven organization dedicated to educating and empowering Filipinos in generative AI, promoting ethical use, innovation, and trust.
           </p>
