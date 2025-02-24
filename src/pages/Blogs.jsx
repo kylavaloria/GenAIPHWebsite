@@ -1,25 +1,54 @@
-import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+// src/pages/Blogs.jsx
+import React, { useState, useEffect } from "react";
+import { collection, getDocs } from "firebase/firestore";
 import { motion } from "framer-motion";
+import { db } from "../config/firebase";
+import BlogTile from "../components/BlogTile";
 import BlogCover from "../sections/BlogCover";
-import BlogList from "../sections/BlogList";
 import Footer from "../sections/Footer";
 
 const Blogs = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const isGoingBack = location.state?.from === "blogs"; // ✅ Detect back navigation
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "blogs"));
+        const blogData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setBlogs(blogData);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
 
   return (
     <motion.div
-      initial={{ x: isGoingBack ? "-100%" : "100%" }} // ✅ No fade, pure slide
+      initial={{ x: "100%" }}
       animate={{ x: "0%" }}
-      exit={{ x: isGoingBack ? "100%" : "-100%" }}
-      transition={{ duration: 0.4, ease: "easeInOut" }}
+      exit={{ x: "-100%" }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
       className="absolute w-full h-full"
     >
-      <BlogCover navigate={navigate} />
-      <BlogList />
+      <BlogCover />
+      <div className="relative bg-[#E5FFF9] px-6 sm:px-12 lg:px-24 py-10">
+        {loading ? (
+          <p className="text-center text-[#27B7B4]">Loading blogs...</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center mx-auto">
+            {blogs.map((blog) => (
+              <BlogTile key={blog.id} blog={blog} />
+            ))}
+          </div>
+        )}
+      </div>
       <Footer />
     </motion.div>
   );
