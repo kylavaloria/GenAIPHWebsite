@@ -4,7 +4,7 @@ const Event = ({ title, date, time, location, venue, image }) => {
   return (
     <div className="text-center w-100 max-w-90">
       {/* Event Image */}
-      <div className="w-65 aspect-[1/1] mb-4 flex justify-center items-center mx-auto shadow-lg overflow-hidden">
+      <div className="w-65 aspect-[1/1] mb-4 flex justify-center items-center mx-auto shadow-lg rounded-lg overflow-hidden">
         <img src={image} alt={title} className="w-full h-full object-cover" />
       </div>
 

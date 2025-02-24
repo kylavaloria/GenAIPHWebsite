@@ -70,7 +70,7 @@ const SuccessEvents = () => {
   return (
     <section className="bg-gradient-to-b from-[#27B7B4] to-[#125655] py-16 px-6 sm:px-10 lg:px-20 relative">
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">Successful Events</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">Our Events</h2>
 
         {/* Events Grid with Smooth Animation */}
         <div className="overflow-hidden w-full flex justify-center relative">
