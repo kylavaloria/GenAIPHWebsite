@@ -3,14 +3,14 @@
   "private": false,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://kylavaloria.github.io",
+  "homepage": "https://kylavaloria.github.io/GenAIPHWebsite",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -b main -d dist"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@fontsource/montserrat": "^5.1.1",
