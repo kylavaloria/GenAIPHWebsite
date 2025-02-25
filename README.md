@@ -1,6 +1,6 @@
 # Gen AI PH Builders Website
 
-Gen AI PH Builders is a **community-driven organization** dedicated to **educating and empowering Filipinos** in generative AI. We advocate for **ethical AI use, innovation, and trust**, aiming to dispel myths and equip individuals with knowledge to **leverage AI for societal benefit**.
+Gen AI PH Builders is a **community-driven organization** dedicated to **educating and empowering Filipinos** in generative AI. We advocate for **ethical AI use, innovation, and trust**.
 
 ## 🚀 Website Features  
 - **Home** – Overview of our mission and initiatives.  
